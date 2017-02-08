@@ -1,4 +1,6 @@
 /*
+ * MIT License
+ *
  * IMS QTI to PDF
  * Copyright (c) 2017 wolfposd
  * 
