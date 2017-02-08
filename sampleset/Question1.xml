@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assessmentItem adaptive="false" identifier="Question1" timeDependent="false" title="Frage 9" xmlns="http://www.imsglobal.org/xsd/imsqti_v2p1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqti_v2p1 imsqti_v2p1.xsd">
+	<responseDeclaration baseType="identifier" cardinality="single" identifier="RESPONSE_27525235">
+		<correctResponse>
+			<value>choice_1495285841</value>
+		</correctResponse>
+		<mapping defaultValue="0" lowerBound="0.0">
+			<mapEntry mapKey="choice_2109614387" mappedValue="0.0"/>
+			<mapEntry mapKey="choice_1495285841" mappedValue="1.0"/>
+			<mapEntry mapKey="choice_1276735670" mappedValue="0.0"/>
+			<mapEntry mapKey="choice_1069609503" mappedValue="0.0"/>
+		</mapping>
+	</responseDeclaration>
+	<outcomeDeclaration baseType="float" cardinality="single" identifier="SCORE">
+		<defaultValue>
+			<value>0</value>
+		</defaultValue>
+	</outcomeDeclaration>
+	<outcomeDeclaration baseType="float" cardinality="single" identifier="MAXSCORE">
+		<defaultValue>
+			<value>1</value>
+		</defaultValue>
+	</outcomeDeclaration>
+	<outcomeDeclaration baseType="identifier" cardinality="single" identifier="FEEDBACKBASIC" view="testConstructor">
+		<defaultValue>
+			<value>empty</value>
+		</defaultValue>
+	</outcomeDeclaration>
+	<itemBody>
+		<p xmlns="">Which actual parameter was used for the method-call, if after the execution the value <font color="#0000ff" face="courier new">6</font> is returned?</p>
+		<p xmlns="">
+			<font color="#0000ff" face="courier new">public int m(int p)
+				<br/>
+				{
+				<br/>
+				    int result = p;
+				<br/>
+				    if (p &gt; 0)
+				<br/>
+				    {
+				<br/>
+				        result = 2*p + m(p-1);
+				<br/>
+				    }	
+				<br/>
+				    return result;		
+				<br/>
+				}</font>
+		</p>
+		<choiceInteraction maxChoices="1" orientation="vertical" responseIdentifier="RESPONSE_27525235" shuffle="true">
+			<simpleChoice identifier="choice_2109614387">1</simpleChoice>
+			<simpleChoice identifier="choice_1495285841">2</simpleChoice>
+			<simpleChoice identifier="choice_1276735670">3</simpleChoice>
+			<simpleChoice identifier="choice_1069609503">4</simpleChoice>
+		</choiceInteraction>
+	</itemBody>
+	<responseProcessing>
+		<responseCondition>
+			<responseIf>
+				<not>
+					<isNull>
+						<variable identifier="RESPONSE_27525235"/>
+					</isNull>
+				</not>
+				<setOutcomeValue identifier="SCORE">
+					<sum>
+						<variable identifier="SCORE"/>
+						<mapResponse identifier="RESPONSE_27525235"/>
+					</sum>
+				</setOutcomeValue>
+				<setOutcomeValue identifier="FEEDBACKBASIC">
+					<baseValue baseType="identifier">incorrect</baseValue>
+				</setOutcomeValue>
+			</responseIf>
+		</responseCondition>
+		<responseCondition>
+			<responseIf>
+				<and>
+					<not>
+						<match>
+							<variable identifier="FEEDBACKBASIC"/>
+							<baseValue baseType="identifier">empty</baseValue>
+						</match>
+					</not>
+					<equal toleranceMode="exact">
+						<variable identifier="SCORE"/>
+						<variable identifier="MAXSCORE"/>
+					</equal>
+				</and>
+				<setOutcomeValue identifier="FEEDBACKBASIC">
+					<baseValue baseType="identifier">correct</baseValue>
+				</setOutcomeValue>
+			</responseIf>
+		</responseCondition>
+	</responseProcessing>
+</assessmentItem>

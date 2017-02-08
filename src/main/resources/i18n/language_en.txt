@@ -1,0 +1,8 @@
+point = point
+points = points
+maximum = (%d %s maximum)
+correctAnswer = (1 correct answer
+perCorrectAnswer = (%d %s per correct answer)
+answer = Answer:
+answerLine = Answer: ____________________________
+page = Page %d of %d

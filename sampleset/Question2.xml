@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assessmentItem adaptive="false" identifier="Question2" timeDependent="false" title="Frage 15" xmlns="http://www.imsglobal.org/xsd/imsqti_v2p1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsqti_v2p1 imsqti_v2p1.xsd">
+	<responseDeclaration baseType="string" cardinality="single" identifier="RESPONSE_1">
+		<correctResponse>
+			<value>passwort.equals(parole)</value>
+		</correctResponse>
+		<mapping defaultValue="0">
+			<mapEntry mapKey="passwort.equals(parole)" mappedValue="2.0"/>
+			<mapEntry mapKey="parole.equals(passwort)" mappedValue="2.0"/>
+		</mapping>
+	</responseDeclaration>
+	<outcomeDeclaration baseType="float" cardinality="single" identifier="SCORE">
+		<defaultValue>
+			<value>0</value>
+		</defaultValue>
+	</outcomeDeclaration>
+	<outcomeDeclaration baseType="float" cardinality="single" identifier="MAXSCORE">
+		<defaultValue>
+			<value>2</value>
+		</defaultValue>
+	</outcomeDeclaration>
+	<outcomeDeclaration baseType="identifier" cardinality="single" identifier="FEEDBACKBASIC" view="testConstructor">
+		<defaultValue>
+			<value>empty</value>
+		</defaultValue>
+	</outcomeDeclaration>
+	<itemBody>
+		<p xmlns="">
+			<p>Complete the source code, to return 
+				<font color="#0000ff" face="courier new">true</font> 
+				if the correct parole was supplied.</p>
+			<p>
+				<font color="#0000ff" face="courier new">public boolean tuerSteher(String parole)
+					<br/>
+					{
+					<br/>
+					    boolean result = false;
+					<br/>
+					    String passwort = &quot;StrongDoor&quot;;
+					<br/>
+					    if(______________)
+					<br/>
+					    {
+					<br/>
+					        result = true;
+					<br/>
+					    }
+					<br/>
+					    return result;
+					<br/>
+					}</font>
+			</p>
+		</p>
+		<textEntryInteraction responseIdentifier="RESPONSE_1"/>
+	</itemBody>
+	<responseProcessing>
+		<responseCondition>
+			<responseIf>
+				<not>
+					<isNull>
+						<variable identifier="RESPONSE_1"/>
+					</isNull>
+				</not>
+				<setOutcomeValue identifier="SCORE">
+					<sum>
+						<variable identifier="SCORE"/>
+						<mapResponse identifier="RESPONSE_1"/>
+					</sum>
+				</setOutcomeValue>
+				<setOutcomeValue identifier="FEEDBACKBASIC">
+					<baseValue baseType="identifier">incorrect</baseValue>
+				</setOutcomeValue>
+			</responseIf>
+		</responseCondition>
+		<responseCondition>
+			<responseIf>
+				<and>
+					<not>
+						<match>
+							<variable identifier="FEEDBACKBASIC"/>
+							<baseValue baseType="identifier">empty</baseValue>
+						</match>
+					</not>
+					<equal toleranceMode="exact">
+						<variable identifier="SCORE"/>
+						<variable identifier="MAXSCORE"/>
+					</equal>
+				</and>
+				<setOutcomeValue identifier="FEEDBACKBASIC">
+					<baseValue baseType="identifier">correct</baseValue>
+				</setOutcomeValue>
+			</responseIf>
+		</responseCondition>
+	</responseProcessing>
+</assessmentItem>
