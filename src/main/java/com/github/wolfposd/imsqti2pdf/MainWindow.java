@@ -86,8 +86,6 @@ public class MainWindow
 
     private void convertAction()
     {
-        final PDFCreator pdf = new PDFCreator();
-
         final String folder = _gui.getInputfield().getText();
 
         String output = folder + "/" + _gui.getOutputfield().getText();
@@ -101,20 +99,32 @@ public class MainWindow
         _gui.getProgresslabel().setForeground(Color.BLACK);
         _gui.getProgresslabel().setText("Progress: Starting conversion");
 
+        System.out.println("Reading XML from file " + folder);
         ArrayList<Question> qlist = XmlParser.getAllQuestionsFromDirectory(folder);
+        System.out.println("Done reading XML");
 
         _gui.getProgresslabel().setText("Progress: Done Reading, Creating PDF");
+        
+        System.out.println("Setup page counter");
         PageCounter pageCounter = new PageCounter();
 
         try
         {
+            System.out.println("Starting PDF conversion");
+            final PDFCreator pdf = new PDFCreator();
+            
+            System.out.println("Creating pdf with fake page count");
             pdf.createPDF(output, qlist, false, pageCounter, 42, folder);
+            System.out.println("Creating pdf with real page count");
             pdf.createPDF(output, qlist, false, null, pageCounter.getNumberPages(), folder);
+            System.out.println("Creating pdf with real page count for solution");
             pdf.createPDF(outputsolution, qlist, true, null, pageCounter.getNumberPages(), folder);
             setSuccess();
+            System.out.println("Done converting");
         }
         catch (Exception e)
         {
+            System.err.println("Ecnountered Error");
             setError(e);
             e.printStackTrace();
         }

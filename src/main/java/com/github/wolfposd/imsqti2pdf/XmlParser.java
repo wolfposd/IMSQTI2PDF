@@ -62,24 +62,28 @@ public class XmlParser
      */
     public static ArrayList<Question> getAllQuestionsFromDirectory(String directory)
     {
+        System.out.println(" > Begin XML Parsing for directory: " + directory);
+
         ArrayList<Question> questions = new ArrayList<Question>();
-
+        
         File dir = new File(directory);
-
         if (dir.isDirectory())
         {
             for (File f : dir.listFiles())
             {
+                System.out.println("  > Starting on file: " + f);
                 if (f.isFile() && f.getName().endsWith(".xml") && !f.getName().contains("imsmanifest.xml"))
                 {
+                    System.out.println("   > Starting parser on: " + f.getName());
                     XmlParser parser = new XmlParser();
                     parser.loadMainParts(f.getAbsolutePath());
                     parser.loadQuestionText(f.getAbsolutePath());
+                    System.out.println("   > adding question");
                     questions.add(parser._question);
                 }
             }
         }
-
+        System.out.println(" >  Done Parsing folder");
         return questions;
     }
 
@@ -244,6 +248,7 @@ public class XmlParser
             }
             catch (UnsupportedEncodingException e)
             {
+                e.printStackTrace();
             }
         }
 
